@@ -19,13 +19,13 @@ bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
-    bot.user.setPresence({
-        status: "online", 
-        game: {
-            name: "!dab to dab",  
-            type: "PLAYING"
-        }
-    });
+});
+bot.user.setPresence({
+    status: "online", 
+    game: {
+        name: "!dab to dab",  
+        type: "PLAYING"
+    }
 });
 var files = fs.readdirSync(__dirname + '/dabimages')
 bot.on('message', function (user, userID, channelID, message, evt) {
