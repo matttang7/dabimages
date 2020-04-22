@@ -1,4 +1,4 @@
-var Discord = require('discord.io');
+var Discord = require('discord.js');
 var logger = require('winston');
 var auth = require('./auth.json');
 var fs = require('fs');
@@ -11,22 +11,15 @@ let token = process.env.token;
 console.log(token);
 logger.level = 'debug';
 // Initialize Discord Bot
-var bot = new Discord.Client({
-   token: auth.token,
-   autorun: true
-});
-bot.on('ready', function (evt) {
+const bot = new Discord.Client();
+
+bot.on('ready', () => {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
+    bot.user.setActivity(`!dab to dab`);
 });
-bot.user.setPresence({
-    status: "online", 
-    game: {
-        name: "!dab to dab",  
-        type: "PLAYING"
-    }
-});
+
 var files = fs.readdirSync(__dirname + '/dabimages')
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
@@ -68,3 +61,5 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         }
      }
 });
+
+bot.login(process.env.token);
