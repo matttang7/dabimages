@@ -10,13 +10,20 @@ logger.add(new logger.transports.Console, {
 logger.level = 'debug';
 // Initialize Discord Bot
 var bot = new Discord.Client({
-   token: auth.token,
+   token: process.env.token,
    autorun: true
 });
 bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
+    bot.user.setPresence({
+        status: "online", 
+        game: {
+            name: "!dab to dab",  
+            type: "PLAYING"
+        }
+    });
 });
 var files = fs.readdirSync(__dirname + '/dabimages')
 bot.on('message', function (user, userID, channelID, message, evt) {
@@ -28,15 +35,10 @@ bot.on('message', function (user, userID, channelID, message, evt) {
        
         args = args.splice(1);
         if(cmd.substring(0,3) == 'dab' | cmd.substring(0,3) == 'Dab'){
-            console.log(args)
-            console.log(parseInt(args))
             let num = parseInt(args)/files.length
-            console.log(num)
             console.log(typeof num === 'number')
             if(typeof num === 'number' && !isNaN(num)){
-                console.log("reached")
                 let chosenFile = files[Math.floor(num * files.length)] 
-                console.log(chosenFile)
                 bot.uploadFile({
                     to: channelID,
                     file: 'dabimages/' + chosenFile
@@ -44,13 +46,17 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             }
             else{
                 let chosenFile = files[Math.floor(Math.random() * files.length)] 
-                console.log(chosenFile)
                 bot.uploadFile({
                     to: channelID,
                     file: 'dabimages/' + chosenFile
                 });
             }
-        // Just add any case commands if you want to..
+        }
+        else if(cmd.substring(0,4) == 'help'){
+            bot.sendMessage({
+                to: channelID,
+                message: 'To use this bot, send !dab for randomized dab picture or !dab (some number from 0 to 368) for a specific image'
+            });
         }
         else{
             bot.sendMessage({
