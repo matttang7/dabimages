@@ -19,7 +19,7 @@ bot.on('ready', () => {
 });
 
 var files = fs.readdirSync(__dirname + '/dabimages')
-bot.on('message', function (user, userID, channelID, message, evt) {
+bot.on('message', async message => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     if (message.substring(0, 1) == '!') {
