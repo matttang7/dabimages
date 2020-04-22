@@ -7,10 +7,11 @@ logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, {
     colorize: true
 });
+let token = process.env.token;
 logger.level = 'debug';
 // Initialize Discord Bot
 var bot = new Discord.Client({
-   token: process.env.token,
+   token: token,
    autorun: true
 });
 bot.on('ready', function (evt) {
