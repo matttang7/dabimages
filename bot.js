@@ -34,30 +34,26 @@ bot.on('message', async message => {
         console.log(typeof num === 'number')
         if(typeof num === 'number' && !isNaN(num)){
             let chosenFile = files[Math.floor(num * files.length)] 
-            bot.uploadFile({
-                to: channelID,
-                file: 'dabimages/' + chosenFile
+            message.channel.send("", {
+                files: [
+                    'dabimages/' + chosenFile
+                ]
             });
         }
         else{
             let chosenFile = files[Math.floor(Math.random() * files.length)] 
-            bot.uploadFile({
-                to: channelID,
-                file: 'dabimages/' + chosenFile
+            message.channel.send("", {
+                files: [
+                    'dabimages/' + chosenFile
+                ]
             });
         }
     }
     else if(command === 'help'){
-        bot.sendMessage({
-            to: channelID,
-            message: 'To use this bot, send !dab for randomized dab picture or !dab (some number from 0 to 368) for a specific image'
-        });
+        message.channel.send('To use this bot, send !dab for randomized dab picture or !dab (some number from 0 to 368) for a specific image');
     }
     else{
-        bot.sendMessage({
-            to: channelID,
-            message: 'I don\'t understand that command'
-        });
+        message.channel.send('I don\'t understand that command');
     }
 });
 
