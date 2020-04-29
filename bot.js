@@ -63,7 +63,13 @@ bot.on('message', async message => {
             num = num % 368;
             console.log(num)
             let chosenFile = files[Math.floor(num * files.length)];
+            await wait(2000);
             checkFile(chosenFile, message);
+            message.channel.send("", {
+                files: [
+                    'dabimages/' + file
+                ]
+            });
         }
         else{
             let chosenFile = files[Math.floor(Math.random() * files.length)] 
