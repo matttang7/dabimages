@@ -50,12 +50,16 @@ bot.on('message', async message => {
             console.log(num)
             let chosenFile = new Promise(function(resolve, reject) {
                 resolve(files[Math.floor(Math.random() * files.length)]);
-             });
-            message.channel.send("", {
-                files: [
-                    'dabimages/' + chosenFile
-                ]
-            });
+             }).
+            then(()=>{
+                console.log(chosenFile)
+                message.channel.send("", {
+                    files: [
+                        'dabimages/' + chosenFile
+                    ]
+                })
+            })
+            .catch(error => console.log(error));
         }
         else{
             let chosenFile = files[Math.floor(Math.random() * files.length)] 
