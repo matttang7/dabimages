@@ -52,8 +52,10 @@ bot.on('message', async message => {
                 console.log('in Promise constructor function');
                 setTimeout(function() {
                   console.log('in setTimeout callback');
-                  resolve(files[Math.floor(num * files.length)]);
-                }, 100);
+                  let file = files[Math.floor(num * files.length)];
+                  console.log(file);
+                  resolve(file);
+                }, 1000);
             });
             promise.then(function(result) {
                 console.log('promise returned: ' + result);
@@ -62,6 +64,8 @@ bot.on('message', async message => {
                         'dabimages/' + result
                     ]
                 });
+            }).catch(function () {
+                console.log("Promise Rejected");
             });
         }
         else{
