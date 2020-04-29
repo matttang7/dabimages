@@ -19,7 +19,6 @@ bot.on('ready', () => {
 });
 
 var files = fs.readdirSync(__dirname + '/dabimages')
- 
 bot.on('message', async message => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -33,6 +32,7 @@ bot.on('message', async message => {
     if(command === 'dab'){
         argument = args[0]
         let num = parseInt(argument)/files.length
+        console.log(typeof num === 'number')
         if(typeof num === 'number' && !isNaN(num)){
             let chosenFile = files[Math.floor(num * files.length)] 
             message.channel.send("", {
@@ -42,14 +42,12 @@ bot.on('message', async message => {
             });
         }
         else if(argument){
-            console.log(argument)
             num = 0;
             for (var i = 0; i < argument.length; i++) {
                num = num + argument.charCodeAt(i)
             }
             num = num % 368;
-            console.log(num)
-            let chosenFile = files[Math.floor(num * files.length)];
+            let chosenFile = files[Math.floor(num * files.length)] 
             message.channel.send("", {
                 files: [
                     'dabimages/' + chosenFile
