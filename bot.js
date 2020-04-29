@@ -32,7 +32,6 @@ bot.on('message', async message => {
     if(command === 'dab'){
         argument = args[0]
         let num = parseInt(argument)/files.length
-        console.log(typeof num === 'number')
         if(typeof num === 'number' && !isNaN(num)){
             let chosenFile = files[Math.floor(num * files.length)] 
             message.channel.send("", {
@@ -49,7 +48,9 @@ bot.on('message', async message => {
             }
             num = num % 368;
             console.log(num)
-            let chosenFile = files[Math.floor(num * files.length)] 
+            let chosenFile = new Promise(function(resolve, reject) {
+                resolve(files[Math.floor(Math.random() * files.length)]);
+             });
             message.channel.send("", {
                 files: [
                     'dabimages/' + chosenFile
