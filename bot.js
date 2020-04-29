@@ -52,10 +52,10 @@ bot.on('message', async message => {
                 resolve(files[Math.floor(Math.random() * files.length)]);
              }).
             then(()=>{
-                console.log(chosenFile)
+                console.log(result)
                 message.channel.send("", {
                     files: [
-                        'dabimages/' + chosenFile
+                        'dabimages/' + result
                     ]
                 })
             })
