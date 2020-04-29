@@ -19,19 +19,6 @@ bot.on('ready', () => {
 });
 
 var files = fs.readdirSync(__dirname + '/dabimages')
-
-function checkFile(file, message) {
-    if (typeof file !== "undefined") {
-        message.channel.send("", {
-            files: [
-                'dabimages/' + file
-            ]
-        });
-    }
-    else{
-        setTimeout(checkFile, 1000);
-    }
-}
  
 bot.on('message', async message => {
     // Our bot needs to know if it will execute a command
@@ -63,11 +50,9 @@ bot.on('message', async message => {
             num = num % 368;
             console.log(num)
             let chosenFile = files[Math.floor(num * files.length)];
-            await wait(2000);
-            checkFile(chosenFile, message);
             message.channel.send("", {
                 files: [
-                    'dabimages/' + file
+                    'dabimages/' + chosenFile
                 ]
             });
         }
