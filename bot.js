@@ -48,18 +48,21 @@ bot.on('message', async message => {
             }
             num = num % 368;
             console.log(num)
-            let chosenFile = new Promise(function(resolve, reject) {
-                resolve(files[Math.floor(Math.random() * files.length)]);
-             }).
-            then(()=>{
-                console.log(result)
+            var promise = new Promise(function(resolve, reject) {
+                console.log('in Promise constructor function');
+                setTimeout(function() {
+                  console.log('in setTimeout callback');
+                  resolve(files[Math.floor(num * files.length)]);
+                }, 100);
+            });
+            promise.then(function(result) {
+                console.log('promise returned: ' + result);
                 message.channel.send("", {
                     files: [
                         'dabimages/' + result
                     ]
-                })
-            })
-            .catch(error => console.log(error));
+                });
+            });
         }
         else{
             let chosenFile = files[Math.floor(Math.random() * files.length)] 
