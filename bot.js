@@ -24,7 +24,7 @@ function checkFile(file, message) {
     if (typeof file !== "undefined") {
         message.channel.send("", {
             files: [
-                'dabimages/' + chosenFile
+                'dabimages/' + file
             ]
         });
     }
