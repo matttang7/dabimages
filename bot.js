@@ -30,23 +30,9 @@ bot.on('message', async message => {
     const command = args.shift().toLowerCase();
     
     if(command === 'dab'){
-        argument = args[0]
-        let num = parseInt(argument)/files.length
+        let num = parseInt(args[0])/files.length
         console.log(typeof num === 'number')
         if(typeof num === 'number' && !isNaN(num)){
-            let chosenFile = files[Math.floor(num * files.length)] 
-            message.channel.send("", {
-                files: [
-                    'dabimages/' + chosenFile
-                ]
-            });
-        }
-        else if(argument){
-            num = 0;
-            for (var i = 0; i < argument.length; i++) {
-               num = num + argument.charCodeAt(i)
-            }
-            num = num % 368;
             let chosenFile = files[Math.floor(num * files.length)] 
             message.channel.send("", {
                 files: [
