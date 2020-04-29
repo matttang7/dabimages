@@ -42,11 +42,13 @@ bot.on('message', async message => {
             });
         }
         else if(argument){
+            console.log(argument)
             num = 0;
             for (var i = 0; i < argument.length; i++) {
                num = num + argument.charCodeAt(i)
             }
             num = num % 368;
+            console.log(num)
             let chosenFile = files[Math.floor(num * files.length)] 
             message.channel.send("", {
                 files: [
