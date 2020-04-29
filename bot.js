@@ -19,6 +19,20 @@ bot.on('ready', () => {
 });
 
 var files = fs.readdirSync(__dirname + '/dabimages')
+
+function checkFile(file, message) {
+    if (typeof file !== "undefined") {
+        message.channel.send("", {
+            files: [
+                'dabimages/' + chosenFile
+            ]
+        });
+    }
+    else{
+        setTimeout(checkFile, 1000);
+    }
+}
+ 
 bot.on('message', async message => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -48,25 +62,8 @@ bot.on('message', async message => {
             }
             num = num % 368;
             console.log(num)
-            var promise = new Promise(function(resolve, reject) {
-                console.log('in Promise constructor function');
-                setTimeout(function() {
-                  console.log('in setTimeout callback');
-                  let file = files[Math.floor(num * files.length)];
-                  console.log(file);
-                  resolve(file);
-                }, 1000);
-            });
-            promise.then(function(result) {
-                console.log('promise returned: ' + result);
-                message.channel.send("", {
-                    files: [
-                        'dabimages/' + result
-                    ]
-                });
-            }).catch(function () {
-                console.log("Promise Rejected");
-            });
+            let chosenFile = files[Math.floor(num * files.length)];
+            checkFile(chosenFile, message);
         }
         else{
             let chosenFile = files[Math.floor(Math.random() * files.length)] 
